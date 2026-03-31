@@ -178,7 +178,27 @@ echo "License: Open Source (GPL)"
 
 * Uses dpkg -l to check installation  
 * Extracts details using dpkg -s  
-* Uses case to print software description  
+* Uses case to print software description
+
+#### Code:
+```
+#!/bin/bash
+# Script 2: FOSS Package Inspector
+
+PACKAGE="git"
+
+echo "===== FOSS PACKAGE INSPECTOR ====="
+
+if command -v $PACKAGE &> /dev/null; then
+    echo "$PACKAGE is installed"
+
+    VERSION=$($PACKAGE --version | awk '{print $3}')
+    echo "Version: $VERSION"
+
+    echo "Git: Distributed version control system promoting open collaboration"
+else
+    echo "$PACKAGE is not installed"
+``` 
 
 ---  
 
@@ -203,7 +223,24 @@ echo "License: Open Source (GPL)"
 
 * Loops through predefined directories  
 * Extracts permissions using ls -ld  
-* Calculates size using du -sh  
+* Calculates size using du -sh
+
+#### Code:
+```
+#!/bin/bash
+
+echo "----- Disk and Permission Auditor -----"
+
+dirs=("/home" "/etc" "/var")
+
+for dir in "${dirs[@]}"
+do
+echo "Directory: $dir"
+ls -ld $dir
+du -sh $dir 2>/dev/null
+echo "-----------------------------"
+done
+``` 
 
 ---  
 
@@ -226,7 +263,36 @@ echo "License: Open Source (GPL)"
 * Reads file line-by-line  
 * Matches keyword using grep  
 * Counts occurrences  
-* Displays last 5 matching lines  
+* Displays last 5 matching lines
+
+#### Code:
+```
+#!/bin/bash
+
+file=$1
+keyword=${2:-error}
+count=0
+
+echo "----- Log File Analyzer -----"
+
+if [ ! -f "$file" ]; then
+echo "File not found!"
+exit 1
+fi
+
+while read line
+do
+echo "$line" | grep -i "$keyword" > /dev/null
+if [ $? -eq 0 ]; then
+count=$((count+1))
+fi
+done < "$file"
+
+echo "Total occurrences of '$keyword': $count"
+
+echo "Last 5 matching lines:"
+grep -i "$keyword" "$file" | tail -5
+```  
 
 ---  
 
@@ -246,7 +312,24 @@ echo "License: Open Source (GPL)"
 
 * Takes 3 inputs from user  
 * Combines them into a paragraph  
-* Saves output to a .txt file  
+* Saves output to a .txt file
+
+#### Code:
+```
+#!/bin/bash
+
+echo "----- Open Source Manifesto Generator -----"
+
+read -p "Enter your name: " name
+read -p "Enter your field: " field
+read -p "Why do you like open source?: " reason
+
+output="$name believes that open source in $field is important because $reason. It promotes collaboration and innovation."
+
+echo "$output" > manifesto.txt
+
+echo "Manifesto saved in manifesto.txt"
+```  
 
 ---  
 
