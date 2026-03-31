@@ -135,7 +135,26 @@ The script collects system information using Linux commands like:
 * uname -r → Kernel version  
 * whoami → Current user  
 * uptime -p → System uptime  
-* lsb_release -d → Distribution info  
+* lsb_release -d → Distribution info
+
+'''
+#!/bin/bash
+
+echo "----- System Identity Report -----"
+
+kernel=$(uname -r)
+user=$(whoami)
+distro=$(lsb_release -d | cut -f2)
+uptime=$(uptime -p)
+datetime=$(date)
+
+echo "Kernel Version: $kernel"
+echo "User: $user"
+echo "Distribution: $distro"
+echo "Uptime: $uptime"
+echo "Date & Time: $datetime"
+echo "License: Open Source (GPL)"
+''' 
 
 ---  
 
