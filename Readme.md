@@ -137,7 +137,8 @@ The script collects system information using Linux commands like:
 * uptime -p → System uptime  
 * lsb_release -d → Distribution info
 
-'''
+#### Code:
+```
 #!/bin/bash
 
 echo "----- System Identity Report -----"
@@ -154,7 +155,7 @@ echo "Distribution: $distro"
 echo "Uptime: $uptime"
 echo "Date & Time: $datetime"
 echo "License: Open Source (GPL)"
-''' 
+``` 
 
 ---  
 
